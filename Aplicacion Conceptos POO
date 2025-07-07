@@ -1,0 +1,87 @@
+// Clase base: Empleado
+class Empleado {
+    // Encapsulación: Atributos privados
+    private String nombre;
+    private double salario;
+
+    // Constructor
+    public Empleado(String nombre, double salario) {
+        this.nombre = nombre;
+        this.salario = salario;
+    }
+
+    // Getters y Setters (Encapsulación)
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+    // Método que puede ser sobrescrito (Polimorfismo)
+    public void mostrarInformacion() {
+        System.out.println("Empleado: " + nombre);
+        System.out.println("Salario: $" + salario);
+    }
+}
+
+// Clase derivada: Gerente (Herencia)
+class Gerente extends Empleado {
+    private String departamento;
+
+    // Constructor que llama al constructor de la clase base
+    public Gerente(String nombre, double salario, String departamento) {
+        super(nombre, salario); // Llama al constructor de Empleado
+        this.departamento = departamento;
+    }
+
+    // Getter y Setter
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    // Sobrescritura de método (Polimorfismo)
+    @Override
+    public void mostrarInformacion() {
+        super.mostrarInformacion();
+        System.out.println("Departamento: " + departamento);
+    }
+}
+
+// Clase principal para probar el programa
+public class Main {
+    // Método con parámetros variables (Polimorfismo)
+    public static void imprimirNombres(Empleado... empleados) {
+        System.out.println("\n--- Lista de Empleados ---");
+        for (Empleado e : empleados) {
+            System.out.println("- " + e.getNombre());
+        }
+    }
+
+    public static void main(String[] args) {
+        // Crear objetos (instancias)
+        Empleado emp1 = new Empleado("Carlos Pérez", 1500.0);
+        Gerente ger1 = new Gerente("María Gómez", 2500.0, "Finanzas");
+
+        // Mostrar información con polimorfismo
+        emp1.mostrarInformacion();
+        System.out.println();
+        ger1.mostrarInformacion();
+
+        // Uso de método polimórfico con parámetros variables
+        imprimirNombres(emp1, ger1);
+    }
+}
